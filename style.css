@@ -1,0 +1,465 @@
+/* ==========================================================================
+   Google Fonts Import
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+/* ==========================================================================
+   CSS Variables (Theme & Design System)
+   ========================================================================== */
+:root {
+    /* Colors */
+    --bg-base: #0B0E14;         /* Deep dark background */
+    --bg-surface: #151A23;      /* Slightly lighter for cards/header */
+    --bg-surface-hover: #1E2532;
+    
+    --text-primary: #F3F4F6;    /* Bright white/gray for headings */
+    --text-secondary: #9CA3AF;  /* Muted gray for paragraphs */
+    
+    --accent-primary: #FF5E00;  /* Sports Action Orange */
+    --accent-hover: #E05200;
+    --live-red: #EF4444;        /* Live indicator red */
+    
+    --border-color: #262D3D;
+    
+    /* Typography */
+    --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+    
+    /* Dimensions & Spacing */
+    --max-width: 1200px;
+    --header-height: 70px;
+    --border-radius: 8px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   Reset & Base Styles
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    /* Crucial for single-page sticky nav UX */
+    scroll-padding-top: calc(var(--header-height) + 20px); 
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-base);
+    color: var(--text-secondary);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    text-decoration: none;
+    color: var(--accent-primary);
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--accent-hover);
+}
+
+ul {
+    list-style: none;
+}
+
+/* Container */
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ==========================================================================
+   Header & Navigation
+   ========================================================================== */
+.site-header {
+    background-color: rgba(21, 26, 35, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: auto;
+    min-height: var(--header-height);
+    display: flex;
+    align-items: center;
+}
+
+.site-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.logo a {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+}
+
+.logo .highlight {
+    color: var(--accent-primary);
+}
+
+.main-nav ul {
+    display: flex;
+    gap: 25px;
+}
+
+.main-nav a {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 5px 0;
+    position: relative;
+}
+
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--accent-primary);
+    transition: var(--transition);
+}
+
+.main-nav a:hover::after {
+    width: 100%;
+}
+
+/* ==========================================================================
+   Hero Section & Outbound Portals (CTA)
+   ========================================================================== */
+.hero-section {
+    padding: 60px 0 80px;
+    background: radial-gradient(circle at top center, #1c2331 0%, var(--bg-base) 70%);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.hero-content {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.hero-content h1 {
+    color: var(--text-primary);
+    font-size: 2.8rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 15px;
+    letter-spacing: -1px;
+}
+
+.hero-subtext {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+}
+
+/* Streaming Portal Grid */
+.streaming-portal-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.portal-card {
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.portal-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background-color: var(--accent-primary);
+    transform: scaleY(0);
+    transition: var(--transition);
+    transform-origin: bottom;
+}
+
+.portal-card:hover {
+    transform: translateY(-5px);
+    background-color: var(--bg-surface-hover);
+    border-color: var(--accent-primary);
+    box-shadow: 0 10px 30px rgba(255, 94, 0, 0.15);
+}
+
+.portal-card:hover::before {
+    transform: scaleY(1);
+}
+
+.all-sports-card {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, var(--bg-surface) 0%, #1a2233 100%);
+    justify-content: center;
+}
+
+.portal-icon {
+    font-size: 2.5rem;
+    margin-right: 20px;
+    line-height: 1;
+}
+
+.portal-text {
+    flex-grow: 1;
+}
+
+.portal-text h3 {
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+/* Pulse Animation for Live Indicator */
+@keyframes pulse {
+    0% { opacity: 1; text-shadow: 0 0 5px rgba(239, 68, 68, 0.5); }
+    50% { opacity: 0.5; text-shadow: none; }
+    100% { opacity: 1; text-shadow: 0 0 5px rgba(239, 68, 68, 0.5); }
+}
+
+.pulse-live {
+    color: var(--live-red);
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: inline-block;
+    animation: pulse 2s infinite;
+}
+
+.portal-arrow {
+    font-size: 1.5rem;
+    color: var(--accent-primary);
+    font-weight: bold;
+    transition: var(--transition);
+}
+
+.portal-card:hover .portal-arrow {
+    transform: translateX(5px);
+}
+
+/* ==========================================================================
+   Article Content (SEO Section)
+   ========================================================================== */
+.content-wrapper {
+    padding: 60px 0;
+}
+
+.article-container {
+    max-width: 900px; /* Optimal reading width for SEO text */
+}
+
+.article-section {
+    margin-bottom: 50px;
+}
+
+/* Make semantic HTML pop slightly for entities without looking spammy */
+.article-section strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.article-section h2 {
+    color: var(--text-primary);
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.article-section h3 {
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 30px 0 15px;
+}
+
+.article-section p {
+    font-size: 1.05rem;
+    margin-bottom: 18px;
+}
+
+/* Compatibility List */
+.compatibility-list {
+    margin: 20px 0 20px 20px;
+}
+
+.compatibility-list li {
+    margin-bottom: 12px;
+    font-size: 1.05rem;
+    position: relative;
+    padding-left: 15px;
+}
+
+.compatibility-list li::before {
+    content: "■";
+    color: var(--accent-primary);
+    position: absolute;
+    left: -10px;
+    font-size: 0.8rem;
+    top: 2px;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.site-footer {
+    background-color: var(--bg-surface);
+    border-top: 1px solid var(--border-color);
+    padding: 60px 0 20px;
+    margin-top: 40px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-logo h3 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.footer-logo .highlight {
+    color: var(--accent-primary);
+}
+
+.footer-links h4, .footer-disclaimer h4 {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: var(--text-secondary);
+}
+
+.footer-links a:hover {
+    color: var(--accent-primary);
+}
+
+.footer-disclaimer p {
+    font-size: 0.85rem;
+    color: #6B7280;
+    line-height: 1.5;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    color: #6B7280;
+}
+
+/* ==========================================================================
+   Media Queries (Responsive Design)
+   ========================================================================== */
+
+/* Tablet & Smaller Desktops */
+@media (max-width: 992px) {
+    .hero-content h1 {
+        font-size: 2.4rem;
+    }
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Mobile Devices */
+@media (max-width: 768px) {
+    .site-header .container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .main-nav {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 5px;
+    }
+    
+    .main-nav ul {
+        width: max-content;
+        margin: 0 auto;
+        gap: 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    /* Stack the portal CTA buttons on mobile */
+    .streaming-portal-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .all-sports-card {
+        grid-column: 1; /* Reset for mobile */
+    }
+    
+    .article-section h2 {
+        font-size: 1.5rem;
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 1.7rem;
+    }
+
+    .portal-card {
+        padding: 20px 15px;
+    }
+
+    .portal-icon {
+        font-size: 2rem;
+        margin-right: 15px;
+    }
+    
+    .portal-text h3 {
+        font-size: 1.15rem;
+    }
+}
